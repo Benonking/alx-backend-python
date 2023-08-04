@@ -1,4 +1,4 @@
-#!/usr/bin/env/ python3
+#!/usr/bin/env python3
 """Module 0-add ntyped-annotated function add"""
 
 
