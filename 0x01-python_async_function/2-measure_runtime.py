@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 '''
-
+Calculate the execution time of a function
 '''
 from time import time
 import asyncio
