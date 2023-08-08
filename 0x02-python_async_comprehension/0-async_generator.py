@@ -9,7 +9,7 @@ from typing import Generator
 
 async def async_generator() -> Generator[float, None, None]:
     '''
-    Loop couritne ten times and sleep 
+    Loop couritne ten times and sleep
     for one second after every loop
     '''
     for _ in range(10):
