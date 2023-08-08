@@ -4,9 +4,10 @@ Coroutine loops ten times and yeads random number
 '''
 import random
 import asyncio
+from typing import Generator
 
 
-async def async_generator():
+async def async_generator() -> Generator[float, None, None]:
     '''
     Loop couritne ten times and sleep 
     for one second after every loop
@@ -16,6 +17,6 @@ async def async_generator():
         yield genRandom()
 
 
-def genRandom() -> int:
+def genRandom() -> float:
     rand = random.uniform(0, 10)
     return rand
