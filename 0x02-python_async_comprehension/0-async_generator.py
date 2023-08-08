@@ -12,11 +12,11 @@ async def async_generator() -> Generator[float, None, None]:
     Loop couritne ten times and sleep
     for one second after every loop
     '''
-    for _ in range(0, 10):
+    for _ in range(10):
         await asyncio.sleep(1)
         yield genRandom()
 
 
-def genRandom() -> float:
+def genRandom() -> int:
     rand = random.uniform(0, 10)
     return rand
