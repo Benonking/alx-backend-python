@@ -26,14 +26,10 @@ class TestAccessNestedmap(unittest.TestCase):
             path: Tuple[str],
             expected_result: Union[Mapping, int]) -> None:
         '''
-        test if fucntion returns
+        test if fucntion returns expected out put
         '''
-        
+
         res = access_nested_map(nested_map, path)
         self.assertEqual(res, expected_result)
         # except KeyError as e:
         #     self.assertIsInstance(expected_result, type(e))
-
-
-if __name__ == "__main__":
-    unittest.main()
