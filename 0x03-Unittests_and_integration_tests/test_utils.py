@@ -78,17 +78,6 @@ class TestMemoize(unittest.TestCase):
     '''implement test_memoize method'''
     def test_memoize(self):
         '''test Tesclass instance a_method'''
-        test_instance = self.Testclass()
-        with patch.object(test_instance, 'a_method') as mock_a_method:
-            # call a_property twice
-            res1 = test_instance.a_property
-            res2 = test_instance.a_property
-
-            # check if a method was called once
-            mock_a_method.assert_called_once()
-            self.assertEqual(res1, 42)
-            self.assertEqual(res2, 2)
-
         class TestClass:
             '''
             Define methods:
@@ -101,3 +90,14 @@ class TestMemoize(unittest.TestCase):
             @memoize
             def a_property(self):
                 return self.a_method()
+
+        test_instance = self.Testclass()
+        with patch.object(test_instance, 'a_method') as mock_a_method:
+            # call a_property twice
+            res1 = test_instance.a_property
+            res2 = test_instance.a_property
+
+            # check if a method was called once
+            mock_a_method.assert_called_once()
+            self.assertEqual(res1, 42)
+            self.assertEqual(res2, 2)
