@@ -10,40 +10,32 @@ from utils import (
 )
 
 
-class TestAccessNestedmap(unittest.TestCase):
-    '''
-    test case for function utils.access_nested_map
-    Technic: use parameterized for in puts
-    '''
-    @parameterized.expand(
-        [
-            ({"a": 1}, ("a",), 1),
-            ({"a": {"b": 2}}, ("a",), {"b": 2}),
-            ({"a": {"b": 2}}, ("a", "b"), 2),
-        ]
-    )
+class TestAccessNestedMap(unittest.TestCase):
+    """Tests function  -> access_nested_map"""
+    @parameterized.expand([
+        ({"a": 1}, ("a",), 1),
+        ({"a": {"b": 2}}, ("a",), {"b": 2}),
+        ({"a": {"b": 2}}, ("a", "b"), 2),
+    ])
     def test_access_nested_map(
             self,
             nested_map: Dict,
             path: Tuple[str],
-            expected_res: Union[Dict, int],) -> None:
-        '''
-        Test if fucntion returns expected out put
-        '''
-        self.assertEqual(access_nested_map(nested_map, path), expected_res)
+            expected: Union[Dict, int],
+            ) -> None:
+        """Tests `access_nested_map`'s output."""
+        self.assertEqual(access_nested_map(nested_map, path), expected)
 
-    @parameterized.expand(
-        [
-            ({}, ("a",), KeyError),
-            ({"a": 1}, ("a", "b"), KeyError),
-        ])
+    @parameterized.expand([
+        ({}, ("a",), KeyError),
+        ({"a": 1}, ("a", "b"), KeyError),
+    ])
     def test_access_nested_map_exception(
             self,
             nested_map: Dict,
             path: Tuple[str],
-            exeption: Union[int, Dict]) -> None:
-        '''
-        check for exceptions
-        '''
-        with self.assertRaises(exeption):
+            exception: Exception,
+            ) -> None:
+        """Tests function  access_nested_map exception raising."""
+        with self.assertRaises(exception):
             access_nested_map(nested_map, path)
