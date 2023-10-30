@@ -4,7 +4,7 @@ Module test_utils
 '''
 from parameterized import parameterized
 import unittest
-from typing import Dict, Tuple, Union, Dict
+from typing import Dict, Tuple, Union
 from utils import (
     access_nested_map
 )
@@ -31,3 +31,19 @@ class TestAccessNestedmap(unittest.TestCase):
         Test if fucntion returns expected out put
         '''
         self.assertEqual(access_nested_map(nested_map, path), expected_res)
+
+    @parameterized.expand(
+        [
+            ({}, ("a",), KeyError),
+            ({"a": 1}, ("a", "b"), KeyError),
+        ])
+    def test_access_nested_map_exception(
+            self,
+            nested_map: Dict,
+            path: Tuple[str],
+            exeption: Union[int, Dict]) -> None:
+        '''
+        check for exceptions
+        '''
+        with self.assertRaises(exeption):
+            access_nested_map(nested_map, path)
