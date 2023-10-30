@@ -82,7 +82,7 @@ class TestMemoize(unittest.TestCase):
             '''
             Define methods:
                 a-method: returns 42
-                a_property: return a_method()
+                a_property: return a_method() //decorated with utils.memoize wrapper
             '''
             def a_method(self):
                 return 42
@@ -93,6 +93,7 @@ class TestMemoize(unittest.TestCase):
 
         test_instance = self.Testclass()
         with patch.object(test_instance, 'a_method') as mock_a_method:
+
             # call a_property twice
             res1 = test_instance.a_property
             res2 = test_instance.a_property
@@ -100,4 +101,4 @@ class TestMemoize(unittest.TestCase):
             # check if a method was called once
             mock_a_method.assert_called_once()
             self.assertEqual(res1, 42)
-            self.assertEqual(res2, 2)
+            self.assertEqual(res2, 42)
