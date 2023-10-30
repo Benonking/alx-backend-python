@@ -4,10 +4,13 @@ Module test_utils
 '''
 from parameterized import parameterized
 import unittest
+import requests
 from typing import Dict, Tuple, Union
 from utils import (
-    access_nested_map
+    access_nested_map,
+    get_json,
 )
+from unittest.mock import patch, Mock
 
 
 class TestAccessNestedMap(unittest.TestCase):
@@ -39,3 +42,32 @@ class TestAccessNestedMap(unittest.TestCase):
         """Tests function  access_nested_map exception raising."""
         with self.assertRaises(exception):
             access_nested_map(nested_map, path)
+
+
+class TestGetJson(unittest.TestCase):
+    '''
+    implement test_get_json function for utils.get_json
+    '''
+    @parameterized.expand([
+        ("http://example.com", {"payload": True},),
+        ("http://holberton.io", {"payload": False}),
+    ])
+    @patch('requests.get')
+    def test_get_json(
+            self, test_url: str,
+            test_payload: Dict[str, any],
+            mock_get
+            ) -> None:
+        '''test utils.get_json function'''
+        # create a mock response
+        mock_res = Mock()
+        mock_res.json.return_value = test_payload
+
+        # config the mock get method to return the mock response
+        mock_get.return_value = mock_res
+        result = get_json(test_url)
+
+        # Assert that mock get method was called once with the url
+        mock_get.assert_called_once_with(test_url)
+        # assert that the result maches the expected JSON data
+        self.assertEqual(result, test_payload)
