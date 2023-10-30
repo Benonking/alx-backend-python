@@ -6,8 +6,9 @@ from parameterized import parameterized
 import unittest
 from typing import Dict, Tuple, Union, Dict
 from utils import (
-	access_nested_map
+    access_nested_map
 )
+
 
 class TestAccessNestedmap(unittest.TestCase):
     '''
@@ -16,8 +17,8 @@ class TestAccessNestedmap(unittest.TestCase):
     '''
     @parameterized.expand(
         [
-            ({"a": 1}, ("a"), 1),
-            ({"a": {"b": 2}}, ("a"), {"b": 2}),
+            ({"a": 1}, ("a",), 1),
+            ({"a": {"b": 2}}, ("a",), {"b": 2}),
             ({"a": {"b": 2}}, ("a", "b"), 2),
         ]
     )
@@ -25,10 +26,8 @@ class TestAccessNestedmap(unittest.TestCase):
             self,
             nested_map: Dict,
             path: Tuple[str],
-            expected_result: Union[Dict, int]) -> None:
+            expected_res: Union[Dict, int],) -> None:
         '''
         Test if fucntion returns expected out put
         '''
-
-        res = access_nested_map(nested_map, path)
-        self.assertEqual(res, expected_result)
+        self.assertEqual(access_nested_map(nested_map, path), expected_res)
