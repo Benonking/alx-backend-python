@@ -9,6 +9,7 @@ from typing import Dict, Tuple, Union
 from utils import (
     access_nested_map,
     get_json,
+    memoize,
 )
 from unittest.mock import patch, Mock
 
@@ -71,3 +72,32 @@ class TestGetJson(unittest.TestCase):
         mock_get.assert_called_once_with(test_url)
         # assert that the result maches the expected JSON data
         self.assertEqual(result, test_payload)
+
+
+class TestMemoize(unittest.TestCase):
+    '''implement test_memoize method'''
+    def test_memoize(self):
+        '''test Tesclass instance a_method'''
+        test_instance = self.Testclass()
+        with patch.object(test_instance, 'a_method') as mock_a_method:
+            # call a_property twice
+            res1 = test_instance.a_property
+            res2 = test_instance.a_property
+
+            # check if a method was called once
+            mock_a_method.assert_called_once()
+            self.assertEqual(res1, 42)
+            self.assertEqual(res2, 2)
+
+        class TestClass:
+            '''
+            Define methods:
+                a-method: returns 42
+                a_property: return a_method()
+            '''
+            def a_method(self):
+                return 42
+
+            @memoize
+            def a_property(self):
+                return self.a_method()

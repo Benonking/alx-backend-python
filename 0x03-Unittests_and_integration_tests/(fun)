@@ -1,0 +1,4 @@
+Help on function wrapper in module __main__:
+
+wwrraappppeerr(*args, **kw)
+    wrapper fun
