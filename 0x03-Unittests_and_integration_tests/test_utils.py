@@ -82,7 +82,8 @@ class TestMemoize(unittest.TestCase):
             '''
             Define methods:
                 a-method: returns 42
-                a_property: return a_method() //decorated with utils.memoize wrapper
+                a_property: return a_method()
+                    //decorated with utils.memoize wrapper
             '''
             def a_method(self):
                 return 42
