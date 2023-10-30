@@ -4,6 +4,7 @@ Module test_utils
 '''
 from parameterized import parameterized, parameterized_class
 import unittest
+from typing import Mapping, Tuple, Union, Mapping
 from utils import access_nested_map
 
 
@@ -14,17 +15,16 @@ class TestAccessNestedmap(unittest.TestCase):
     '''
     @parameterized.expand(
         [
-            ("Test case 1", {"a": 1}, ["a"], 1),
-            ("Test Case 2", {"a": {"b": 2}}, ["a"], {"b": 2}),
-            ("Test Case 3", {"a": {"b": 2}}, ["a", "b"], 2)
+            ({"a": 1}, ["a"], 1),
+            ({"a": {"b": 2}}, ["a"], {"b": 2}),
+            ({"a": {"b": 2}}, ["a", "b"], 2)
         ]
     )
     def test_access_nested_map(
             self,
-            test_case,
-            nested_map,
-            path,
-            expected_result):
+            nested_map: Mapping,
+            path: Tuple[str],
+            expected_result: Union[Mapping, int]) -> None:
         '''
         test if fucntion returns
         '''
