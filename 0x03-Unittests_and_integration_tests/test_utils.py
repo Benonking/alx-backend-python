@@ -75,7 +75,7 @@ class TestGetJson(unittest.TestCase):
 
 
 class TestMemoize(unittest.TestCase):
-     """
+    """
     TestMemoize class
     """
 
