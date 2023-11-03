@@ -55,7 +55,8 @@ class TestGetJson(unittest.TestCase):
     ])
     @patch('requests.get')
     def test_get_json(
-            self, test_url: str,
+            self,
+            test_url: str,
             test_payload: Dict[str, any],
             mock_get
             ) -> None:
