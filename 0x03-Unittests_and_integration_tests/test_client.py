@@ -22,7 +22,7 @@ class TestGithuborgclient(unittest.TestCase):
         ("google", {'login': "google"}),
         ("abc", {'login': "abc"}),
     ])
-    @patch('client.get_json')
+    @patch("client.get_json")
     def test_org(
             self,
             org: str,
@@ -35,4 +35,4 @@ class TestGithuborgclient(unittest.TestCase):
         gh_client = GithubOrgClient(org)
         self.assertEqual(gh_client.org(), resp)
         mock_fn.assert_called_once_with(
-            "https://api.github.com/orgs/{org}".format(org))
+            "https://api.github.com/orgs/{}".format(org))
