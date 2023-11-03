@@ -75,35 +75,35 @@ class TestGetJson(unittest.TestCase):
 
 
 class TestMemoize(unittest.TestCase):
-    '''implement test_memoize method'''
+     """
+    TestMemoize class
+    """
+
     def test_memoize(self):
-        '''test Tesclass instance a_method'''
+        """
+        TestMemoize method
+        """
+
         class TestClass:
-            '''
-            Define methods:
-                a-method: returns 42
-                a_property: return a_method()
-                    //decorated with utils.memoize wrapper
-            '''
+            """
+            TestClass class
+            """
+
             def a_method(self):
-                '''
-                a_method: return 42
-                '''
+                """
+                a_method method
+                """
                 return 42
 
             @memoize
             def a_property(self):
-                '''function a_property'''
+                """
+                a_property method
+                """
                 return self.a_method()
 
-        with patch.object(
-                TestClass,
-                'a_method',
-                return_value=42) as mock_a_method:
-            test_instance = self.Testclass
-            # call a_property twice
-            test_instance.a_property
-            test_instance.a_property
-
-            # check if a method was called once
-            mock_a_method.assert_called_once()
+        with patch.object(TestClass, 'a_method', return_value=42) as mock:
+            test_class = TestClass()
+            test_class.a_property
+            test_class.a_property
+            mock.assert_called_once()
