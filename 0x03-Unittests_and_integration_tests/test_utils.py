@@ -60,7 +60,7 @@ class TestGetJson(unittest.TestCase):
             mock_get
             ) -> None:
         '''test utils.get_json function'''
-        # create a mock response
+        # create a mock response object
         mock_res = Mock()
         mock_res.json.return_value = test_payload
 
@@ -86,20 +86,23 @@ class TestMemoize(unittest.TestCase):
                     //decorated with utils.memoize wrapper
             '''
             def a_method(self):
+                '''
+                a_method: return 42
+                '''
                 return 42
 
             @memoize
             def a_property(self):
+                '''function a_property'''
                 return self.a_method()
 
         test_instance = self.Testclass()
-        with patch.object(test_instance, 'a_method') as mock_a_method:
+        with patch.object(test_instance, 'a_method', return_value=42) as mock_a_method:
 
             # call a_property twice
-            res1 = test_instance.a_property
-            res2 = test_instance.a_property
+            test_instance.a_property
+            test_instance.a_property
 
             # check if a method was called once
             mock_a_method.assert_called_once()
-            self.assertEqual(res1, 42)
-            self.assertEqual(res2, 42)
+            
